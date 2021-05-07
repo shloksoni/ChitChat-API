@@ -15,6 +15,7 @@ router.get('/', (req,res) =>{
 })
 router.post('/postTweet', checkToken, cleanText, (req, res)=>{
   const user = req.user
+
   knex('tweets').insert({tweet_text : req.cleanedText, username : user.username})
   .returning('*')
   .then(tweet =>{

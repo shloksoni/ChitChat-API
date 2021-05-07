@@ -48,7 +48,7 @@ router.post('/register',
         .insert({email,name,password,username})
         .returning('*')
         .then(users =>{
-          var token = getToken(username)
+          var token = getToken(users[0])
           res.cookie('authCookie', token)
           return res.send({auth: true, user: users[0]});
         })
